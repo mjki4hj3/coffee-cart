@@ -39,12 +39,13 @@ def new_product():
 
     # docs - https://docs.python.org/3/library/functions.html#isinstance
     if not isinstance(price, float):
-        print("Oops something went wrong, please enter a string only: ")
-        new_product()  # I wonder if we can get it to restart by asking what the price is rather than starting it all ove again
+        print("Oops something went wrong, please enter a number only: ")
+        new_product()
 
     c = Coffee(name, price)  # new instance of the coffee class
 
-    fout.write(c.name, c.price)
+    fout.write('name: ' + c.name + '\n')
+    fout.write('price: ' + str(c.price))
     fout.close()  # close that file boii
 
 
