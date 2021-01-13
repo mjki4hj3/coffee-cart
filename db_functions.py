@@ -27,7 +27,7 @@ def no_lines():
 
 
 def new_product():
-    fout = open(DB_GLOBAL, 'w')
+    fout = open(DB_GLOBAL, 'a')
 
     name = input(
         "What coffee type would you like to add to the database?: ")
@@ -45,8 +45,5 @@ def new_product():
     c = Coffee(name, price)  # new instance of the coffee class
 
     fout.write('name: ' + c.name + '\n')
-    fout.write('price: ' + str(c.price))
+    fout.write('price: ' + str(c.price) + '\n')
     fout.close()  # close that file boii
-
-
-new_product()

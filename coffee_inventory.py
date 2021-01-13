@@ -2,6 +2,48 @@ import os
 from time import sleep
 # moved all the helper functions to a separate file for cleaner code - this imports it all in
 from functions import *
+from db_functions import *
+
+
+def clr():
+    # Clears the terminal - at some point we can use the clear function from the os module
+    print("\n"*100)
+
+
+def show_products():
+    print("===Under Construction===\n")
+    sleep(1)
+    clr()
+    main_menu()
+
+
+def create_product():
+    new_product()
+    print("Great you have added a new product to the database")
+    sleep(2)
+    main_menu()
+
+
+def update_product():
+    print("===Under Construction===\n")
+    sleep(2)
+    clr()
+    main_menu()
+
+
+def delete_product():
+    print("===Under Construction===\n")
+    sleep(2)
+    clr()
+    main_menu()
+
+
+def exit_app():
+    clr()
+    print("Goodbye")
+    sleep(2)
+    clr()
+    exit()
 
 
 def product_menu():
@@ -32,7 +74,6 @@ def product_menu():
 
 
 def main_menu():
-    clr()
     print('''
  _____________
 | MAIN MENU |
