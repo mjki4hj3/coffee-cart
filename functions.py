@@ -7,5 +7,5 @@ def prompt():
     if input == ('Y' or 'y'):
         product_menu()
     else:
-        print("Goo")
+        print("Goodbye")
     exit()
