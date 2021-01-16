@@ -11,10 +11,7 @@ def clr():
 
 
 def show_products():
-    print("===Under Construction===\n")
-    sleep(1)
-    clr()
-    main_menu()
+    read_db()
 
 
 def create_product():

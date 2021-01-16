@@ -8,10 +8,13 @@ DB_GLOBAL = 'database.txt'
 def read_db():
     try:
         fhand = open(DB_GLOBAL)
+        for line in fhand:
+            print(line)
     except:
         print('Following file cannot be opened: ', fhand)
         exit()
     return fhand
+
 
 # line checker
 
@@ -45,5 +48,7 @@ def new_product():
     c = Coffee(name, price)  # new instance of the coffee class
 
     fout.write('name: ' + c.name + '\n')
-    fout.write('price: ' + str(c.price) + '\n')
+    fout.write('price: ' + str(c.price) + '\n'*2)
     fout.close()  # close that file boii
+
+#
