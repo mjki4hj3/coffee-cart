@@ -1,4 +1,3 @@
-from coffee import *
 
 DB_GLOBAL = 'database.txt'
 
@@ -7,16 +6,19 @@ DB_GLOBAL = 'database.txt'
 
 def read_db():
     try:
-        fhand = open(DB_GLOBAL)
-        for line in fhand:
-            print(line)
+        fhand = open(DB_GLOBAL, 'r')
     except:
-        print('Following file cannot be opened: ', fhand)
+        print('Following file cannot be opened: {}'.format(fhand))
         exit()
     return fhand
 
 
-# line checker
+def display_db():
+    file = read_db()
+    for line in file:
+        print(line)
+
+# number of lines in db
 
 
 def no_lines():
