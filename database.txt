@@ -1,6 +1,0 @@
-name: Latte
-price: 1.75
-
-name: Mocha
-price: 1.5
-

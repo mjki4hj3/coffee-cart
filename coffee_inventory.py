@@ -1,7 +1,7 @@
 import os
 from time import sleep
 # moved all the helper functions to a separate file for cleaner code - this imports it all in
-from functions import *
+
 from db_functions import *
 
 
@@ -15,8 +15,8 @@ def show_products():
 
 
 def create_product():
-    new_product()
-    print("Great you have added a new product to the database")
+    product = new_product()
+    print("Great you have added {} to the database".format(product))
     sleep(2)
     main_menu()
 
@@ -56,7 +56,7 @@ def product_menu():
 |________________________|
     ''')
 
-    def input_checker(user_input):
+    def input_reciever(user_input):
         return {
             0: main_menu,
             1: show_products,
@@ -66,28 +66,29 @@ def product_menu():
         }.get(user_input, "===Invalid Input===\n")  # Invalid input is default if user_input is not found
 
     user_input = int(input("Type Here: "))
-    result_function = input_checker(user_input)  # uncalled function here
+    result_function = input_reciever(user_input)  # uncalled function here
     result_function()  # gets called here
 
 
 def main_menu():
     print('''
- _____________
-| MAIN MENU |
-|_____________ |
+ ________________
+|    MAIN MENU   |
+|________________|
 |EXIT APP... | 0 |
 |PRODUCTS... | 1 |
-|___________ | _|
+|___________ | _ |
     ''')
 
-    def input_checker(user_input):
+    user_input = int(input("Type Here: " + "\n"))
+
+    def input_reciever(user_input):
         return {
             0: exit_app,
             1: product_menu
-        }.get(user_input, "===Invalid Input===\n")  # Invalid input is default if user_input is not found
+        }.get(user_input, "===Invalid Input===\n")
 
-    user_input = int(input("Type Here: "))
-    result_function = input_checker(user_input)
+    result_function = input_reciever(user_input)
     result_function()
 
 

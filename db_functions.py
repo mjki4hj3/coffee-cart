@@ -20,35 +20,40 @@ def read_db():
 
 
 def no_lines():
-    fhand = read_db
+    file = open(DB_GLOBAL, 'r')
     count = 0
-    for line in fhand:
+    for line in file:
         count += 1
-        print('Line count: ', count)
+    return count
+
+
+# enumerate database
+
+
+def enumerate_product(name):
+    len = no_lines()
+    enumerated_product = list(enumerate(name.split(), len))
+    return enumerated_product
 
 # writing to database
 
 
 def new_product():
-    fout = open(DB_GLOBAL, 'a')
-
-    name = input(
-        "What coffee type would you like to add to the database?: ")
-    if not name.isalpha():  # checks if the name entered is a string only
+    file = open(DB_GLOBAL, 'a+')
+    print("So you would like to add a new product ey, let's see... \n")
+    try:
+        product_name = str(input(
+            "What coffee type would you like to add to the database?: "))
+    except:
         print("Oops something went wrong, please enter a string only: ")
-        new_product()
 
-    price = float(input("What is the price/unit?: "))
+    # c = Coffee(name)  # new instance of the coffee class
 
-    # docs - https://docs.python.org/3/library/functions.html#isinstance
-    if not isinstance(price, float):
-        print("Oops something went wrong, please enter a number only: ")
-        new_product()
+    new_product = enumerate_product(product_name)
 
-    c = Coffee(name, price)  # new instance of the coffee class
+    for count, item in new_product:
 
-    fout.write('name: ' + c.name + '\n')
-    fout.write('price: ' + str(c.price) + '\n'*2)
-    fout.close()  # close that file boii
+        file.write("{:3d}) {}".format(count, item) + '\n')
 
-#
+    file.close()
+    return product_name
