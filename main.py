@@ -1,7 +1,7 @@
 import os
 from time import sleep
 # moved all the helper functions to a separate file for cleaner code - this imports it all in
-from prompt import *
+from functions import *
 from db_functions import *
 
 
