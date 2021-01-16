@@ -11,6 +11,8 @@ def clr():
 
 
 def show_products():
+    print("Fetching database one moment \n")
+    sleep(1)
     read_db()
 
 
