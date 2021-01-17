@@ -63,20 +63,9 @@ def new_product():
 # updating the database
 
 
-def update_database():
+def update_database(position, updated_product):
     file = open(DB_GLOBAL)
     lines = file.readlines()
-    old_product = 'Mocha'
-    updated_product = 'Hot Chocolate'
-
-    for line in lines:
-        if old_product in line:
-            # filters out for the id which also doubles as the position number
-            position = int(re.sub('\D', '', line))
-            break
-        else:
-            continue
-        print("This drink is not in the database")
 
     lines[position] = "{:3d}) {}".format(position, updated_product) + '\n'
 
@@ -84,4 +73,17 @@ def update_database():
     file.writelines(lines)
 
 
-update_database()
+def product_check(product):
+    file = open(DB_GLOBAL)
+    lines = file.readlines()
+    for line in lines:
+        if product in line:
+            # filters out for the id which also doubles as the position number
+            position = int(re.sub('\D', '', line))
+            print(position)
+            return position
+            break
+        else:
+            continue
+    print("This drink is not in the database")
+    return -1

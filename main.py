@@ -50,7 +50,27 @@ def create_product():
 
 
 def update_product():
-    product = update_database()
+    try:
+        old_product = str(input("What product would you like to update?: "))
+        position = product_check(old_product)
+        if position == -1:
+            update_product()
+    except ValueError:
+        print("Oops, looks like you did not enter a string, please try again")
+        update_product()
+
+    try:
+        updated_product = str(input(
+            "What would you like to update the product to?: "))
+    except ValueError:
+        print("Oops, looks like you did not enter a string, please try again")
+        update_product()
+
+    update_database(position, updated_product)
+    print("The database has been updated to include {} instead of {}".format(
+        updated_product, old_product))
+    sleep(2.5)
+    prompt()
 
 
 def delete_product():
