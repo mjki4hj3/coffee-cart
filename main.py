@@ -26,10 +26,13 @@ def prompt():
         prompt()
     if output == ('Y' or 'y'):
         product_menu()
-    else:
+    elif output == ('N' or 'n'):
         print("Goodbye")
         sleep(0.5)
-    exit()
+        exit()
+    else:
+        print("You did not enter Y or N, please try again")
+        prompt()
 
 
 def show_products():
