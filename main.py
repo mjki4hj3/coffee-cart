@@ -1,7 +1,7 @@
 import os
 from time import sleep
 # moved all the helper functions to a separate file for cleaner code - this imports it all in
-from prompt import *
+from functions import *
 from db_functions import *
 
 
@@ -26,10 +26,13 @@ def prompt():
         prompt()
     if output == ('Y' or 'y'):
         product_menu()
-    else:
+    elif output == ('N' or 'n'):
         print("Goodbye")
         sleep(0.5)
-    exit()
+        exit()
+    else:
+        print("You did not enter Y or N, please try again")
+        prompt()
 
 
 def show_products():
