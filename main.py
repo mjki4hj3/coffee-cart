@@ -24,9 +24,9 @@ def prompt():
     except ValueError:
         print("You did not enter Y or N, please try again")
         prompt()
-    if output == ('Y' or 'y'):
+    if output == 'Y' or 'y':
         product_menu()
-    elif output == ('N' or 'n'):
+    elif output == 'N' or 'n':
         print("Goodbye")
         sleep(0.5)
         exit()
@@ -50,10 +50,7 @@ def create_product():
 
 
 def update_product():
-    print("===Under Construction===\n")
-    sleep(2)
-    clr()
-    prompt()
+    product = update_database()
 
 
 def delete_product():
