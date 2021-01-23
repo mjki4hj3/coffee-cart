@@ -142,7 +142,6 @@ def main_menu():
         return {
             0: exit_app,
             1: product_menu,
-
         }.get(user_input, invalid)
 
     result_function = input_reciever(user_input)

@@ -1,3 +1,2 @@
-  0) Cappucino
-  1) 23
-  2) Mocha
+Hot Chocolate
+Cappucino
