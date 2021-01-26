@@ -1,4 +1,4 @@
-
+import re
 DB_GLOBAL = 'database.txt'
 
 # read database
@@ -59,3 +59,31 @@ def new_product():
 
     file.close()
     return product_name
+
+# updating the database
+
+
+def update_database(position, updated_product):
+    file = open(DB_GLOBAL)
+    lines = file.readlines()
+
+    lines[position] = "{:3d}) {}".format(position, updated_product) + '\n'
+
+    file = open(DB_GLOBAL, 'w')
+    file.writelines(lines)
+
+
+def product_check(product):
+    file = open(DB_GLOBAL)
+    lines = file.readlines()
+    for line in lines:
+        if product in line:
+            # filters out for the id which also doubles as the position number
+            position = int(re.sub('\D', '', line))
+            print(position)
+            return position
+            break
+        else:
+            continue
+    print("This drink is not in the database")
+    return -1

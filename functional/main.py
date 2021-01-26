@@ -24,9 +24,9 @@ def prompt():
     except ValueError:
         print("You did not enter Y or N, please try again")
         prompt()
-    if output == ('Y' or 'y'):
+    if output == 'Y' or 'y':
         product_menu()
-    elif output == ('N' or 'n'):
+    elif output == 'N' or 'n':
         print("Goodbye")
         sleep(0.5)
         exit()
@@ -50,9 +50,26 @@ def create_product():
 
 
 def update_product():
-    print("===Under Construction===\n")
-    sleep(2)
-    clr()
+    try:
+        old_product = str(input("What product would you like to update?: "))
+        position = product_check(old_product)
+        if position == -1:
+            update_product()
+    except ValueError:
+        print("Oops, looks like you did not enter a string, please try again")
+        update_product()
+
+    try:
+        updated_product = str(input(
+            "What would you like to update the product to?: "))
+    except ValueError:
+        print("Oops, looks like you did not enter a string, please try again")
+        update_product()
+
+    update_database(position, updated_product)
+    print("The database has been updated to include {} instead of {}".format(
+        updated_product, old_product))
+    sleep(2.5)
     prompt()
 
 
@@ -125,7 +142,6 @@ def main_menu():
         return {
             0: exit_app,
             1: product_menu,
-
         }.get(user_input, invalid)
 
     result_function = input_reciever(user_input)
