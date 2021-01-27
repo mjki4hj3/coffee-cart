@@ -1,6 +1,6 @@
 import os
 from time import sleep
-from menu import *
+from menus import *
 from dbClass import Database
 
 
@@ -21,13 +21,13 @@ class MiniProject:
         user_input = self.prompt("Type here: ")
         while True:
             if user_input == '0':
-                self.clear()
+                # self.clear()
                 print("Goodbye, please come again")
                 sleep(1)
-                self.clear()
+                # self.clear()
                 exit()
             elif user_input == '1':
-                self.clear()
+                # self.clear()
                 self.menu()
             else:
                 print("Oops looks like you did not enter one of the options")
@@ -39,30 +39,55 @@ class MiniProject:
 
         while True:
             if user_input == '0':
-                self.clear()
+                # self.clear()
                 print("Returning to main menu")
-                self.clear()
+                # self.clear()
                 self.options()
                 break
             elif user_input == '1':
-                self.clear()
+                # self.clear()
                 self.menu()
             elif user_input == '2':
                 self.clear()
 
             elif user_input == '3':
-                self.clear()
-                return "Under Construction"
+                # self.clear()
+                self.db_selection()
 
             elif user_input == '4':
-                self.clear()
+                # self.clear()
                 return "Under Construction"
 
             else:
                 print("Oops looks like you did not enter one of the options")
                 break
 
-    def db_activator(self, database_filename):
+    def db_selection(self):
+        databases = os.listdir('./DB')
+        for key, database in enumerate(databases):
+            database = database.replace(".csv", "")
+            print(f"{key}: {database}")
+
+        user_input = self.prompt(
+            "Please choose a database to update from the above databases by inputing its associated number")
+
+        while True:
+            if user_input == '0':
+                database_filename = databases[int(user_input)]
+                break
+            elif user_input == '1':
+                database_filename = databases[int(user_input)]
+                break
+            else:
+                print(
+                    "Oops, looks like you did not enter a valid option, please try again")
+                sleep(1)
+
+        return database_filename
+
+    def db_load(self):  # think of a better name than this
+
+        database_filename = self.db_selection()
         db = Database(database_filename)
 
 
@@ -71,8 +96,3 @@ if __name__ == "__main__":
     main = MiniProject()  # Initialize programme
     while True:
         main.options()
-
-
-#
-# want to create a function that
-#
