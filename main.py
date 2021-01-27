@@ -1,7 +1,7 @@
 import os
 from time import sleep
 from menu import *
-import csv
+from dbClass import Database
 
 
 class MiniProject:
@@ -12,36 +12,58 @@ class MiniProject:
         sleep(1)
         os.system('cls' if os.name == 'nt' else 'clear')
 
+    def prompt(self, prompt_text=""):
+        user_input = input(f"{prompt_text}: ")
+        return user_input.strip()
+
     def options(self):
         main_menu()
-        user_input = input("Type here: ")
+        user_input = self.prompt("Type here: ")
         while True:
             if user_input == '0':
                 self.clear()
                 print("Goodbye, please come again")
-                sleep(2)
+                sleep(1)
                 self.clear()
                 exit()
             elif user_input == '1':
                 self.clear()
-                options_menu()
                 self.menu()
             else:
                 print("Oops looks like you did not enter one of the options")
                 break
 
-    def read_db(self, db):
-        with open(db, 'r') as csv_file:
-            reader = csv.DictReader(csv_file)
+    def menu(self):
+        options_menu()
+        user_input = self.prompt("Please select a menu option")
 
-            for line in reader:
-                print(line)
+        while True:
+            if user_input == '0':
+                self.clear()
+                print("Returning to main menu")
+                self.clear()
+                self.options()
+                break
+            elif user_input == '1':
+                self.clear()
+                self.menu()
+            elif user_input == '2':
+                self.clear()
 
-    def add_to_db(self):
-        return "under construction"
+            elif user_input == '3':
+                self.clear()
+                return "Under Construction"
 
-    def update_db(self):
-        return "under construction"
+            elif user_input == '4':
+                self.clear()
+                return "Under Construction"
+
+            else:
+                print("Oops looks like you did not enter one of the options")
+                break
+
+    def db_activator(self, database_filename):
+        db = Database(database_filename)
 
 
 # Main
@@ -49,3 +71,8 @@ if __name__ == "__main__":
     main = MiniProject()  # Initialize programme
     while True:
         main.options()
+
+
+#
+# want to create a function that
+#
