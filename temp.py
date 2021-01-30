@@ -1,12 +1,18 @@
 valid_input = [0, 1, 2]
 
-user_input = input("please input a value: ")
 
-while True:
-    if int(user_input) in valid_input:
-        print("working")
-    else:
-        print("not working")
-        break
+def test():
+    user_input = input("> ")
 
-print("OOL")
+    while True:
+        if int(user_input) in valid_input:
+            print("working")
+            break
+        else:
+            print("not working")
+            test()
+
+
+def work():
+  while int(input("\n".join(range(3) + "\nplease input a number from the options: ")) not in [0, 1, 2]:
+      print("not working")

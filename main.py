@@ -85,14 +85,12 @@ class MiniProject:
 
         valid_input = list(range(len(databases)))
 
-        while True:
-            if int(user_input) in valid_input:
-                database_filename = databases[int(user_input)]
-                break
-            else:
-                print(
-                    "\n Oops, looks like you did not enter a valid option, please try again \n")
-                self.db_selection()
+        if int(user_input) in valid_input:
+            database_filename = databases[int(user_input)]
+        else:
+            print(
+                "\n Oops, looks like you did not enter a valid option, please try again \n")
+            self.db_selection()
 
         db = Database('DB/' + database_filename)
         return db
