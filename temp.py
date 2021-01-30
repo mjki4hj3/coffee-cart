@@ -1,16 +1,12 @@
-def menu_dict():
-    return {
-        0: 'main_menu',
-        1: 'show_products',
-    }
+valid_input = [0, 1, 2]
 
+user_input = input("please input a value: ")
 
 while True:
-    user_input = input("Pick 1 or 0: ")
+    if int(user_input) in valid_input:
+        print("working")
+    else:
+        print("not working")
+        break
 
-    if user_input == '0':
-        dictionary = menu_dict()
-        print(dictionary[int(user_input)])
-    elif user_input == '1':
-        dictionary = menu_dict()
-        print(dictionary[int(user_input)])
+print("OOL")

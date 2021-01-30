@@ -52,25 +52,30 @@ class MiniProject:
                 exit()
 
             elif user_input == '2':  # create new product
-                self.clear()
+                db = self.db_selection()
+                db.print_fieldnames(db.fieldnames())
+                exit()
 
             elif user_input == '3':  # update database
                 # self.clear()
-                database_filename = self.db_selection()
-                db = Database('DB/' + database_filename)
+                db = self.db_selection()
+                db.update()
                 exit()
 
             elif user_input == '4':
-                # self.clear()
-                return "Under Construction"
-
+                db = self.db_selection()
+                db.delete()
+                exit()
             else:
-                print("Oops looks like you did not enter one of the options")
+                self.menu()
                 break
 
     def db_selection(self):
         database_filename = ''
+
+        # returns the files in the database directory as a list
         databases = os.listdir('./DB')
+
         for key, database in enumerate(databases):
             database = database.replace(".csv", "")
             print(f"{key}: {database}")
@@ -78,20 +83,16 @@ class MiniProject:
         user_input = self.prompt(
             "Please choose a database to update from the above databases by inputing its associated number")
 
+        valid_input = list(range(len(databases)))
+
         while True:
-            if user_input == '0':
-                database_filename = databases[int(user_input)]
-                break
-            elif user_input == '1':
-                database_filename = databases[int(user_input)]
-                break
-            elif user_input == '2':
+            if int(user_input) in valid_input:
                 database_filename = databases[int(user_input)]
                 break
             else:
                 print(
-                    "Oops, looks like you did not enter a valid option, please try again")
-                sleep(1)
+                    "\n Oops, looks like you did not enter a valid option, please try again \n")
+                self.db_selection()
 
         db = Database('DB/' + database_filename)
         return db

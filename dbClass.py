@@ -7,13 +7,22 @@ class Database:
 
     def read_db(self):
         with open(self.db, 'r') as csv_file:
-            reader = csv.DictReader(csv_file)
-
-            for line in reader:
+            csv_dict = csv.DictReader(csv_file)
+            for line in csv_dict:
                 print(str(line) + '\n')
 
-    def add_to_db(self):
-        return "under construction"
+    def fieldnames(self):
+        field_names = []
+        with open(self.db, 'r') as csv_file:
+            reader = csv.reader(csv_file)
+            field_names = next(reader)
 
-    def update_db(self):
+        return field_names
+
+    def print_fieldnames(self, field_names):
+
+        for key, field_name in enumerate(field_names):
+            print(f"{key}: {field_name}")
+
+    def update(self):
         return "under construction"
