@@ -19,10 +19,11 @@ class Database:
 
         return field_names
 
-    def print_fieldnames(self, field_names):
-
+    def print_fieldnames(self):
+        field_names = self.fieldnames()
         for key, field_name in enumerate(field_names):
             print(f"{key}: {field_name}")
 
     def update(self):
-        return "under construction"
+        user_input = input("Please select one of the fields to update: ")
+        fieldy = self.fieldnames()

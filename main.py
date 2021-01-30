@@ -53,12 +53,13 @@ class MiniProject:
 
             elif user_input == '2':  # create new product
                 db = self.db_selection()
-                db.print_fieldnames(db.fieldnames())
+                db.print_fieldnames()
                 exit()
 
             elif user_input == '3':  # update database
                 # self.clear()
                 db = self.db_selection()
+                db.print_fieldnames(db.fieldnames())
                 db.update()
                 exit()
 
