@@ -10,7 +10,7 @@ class Database:
             reader = csv.DictReader(csv_file)
 
             for line in reader:
-                print(line)
+                print(str(line) + '\n')
 
     def add_to_db(self):
         return "under construction"

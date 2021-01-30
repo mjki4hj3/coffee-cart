@@ -6,7 +6,8 @@ from dbClass import Database
 
 class MiniProject:
     def __init__(self, project="MiniProject"):
-        self.project = project  # Look into this further at somepoint
+        # do i have to have more than argument for the constructor function
+        self.project = project
 
     def clear(self):
         sleep(1)
@@ -38,21 +39,26 @@ class MiniProject:
         user_input = self.prompt("Please select a menu option")
 
         while True:
-            if user_input == '0':
+            if user_input == '0':  # return to main menu
                 # self.clear()
                 print("Returning to main menu")
                 # self.clear()
                 self.options()
                 break
-            elif user_input == '1':
+            elif user_input == '1':  # show products
                 # self.clear()
-                self.menu()
-            elif user_input == '2':
+                db = self.db_selection()
+                db.read_db()
+                exit()
+
+            elif user_input == '2':  # create new product
                 self.clear()
 
-            elif user_input == '3':
+            elif user_input == '3':  # update database
                 # self.clear()
-                self.db_selection()
+                database_filename = self.db_selection()
+                db = Database('DB/' + database_filename)
+                exit()
 
             elif user_input == '4':
                 # self.clear()
@@ -63,6 +69,7 @@ class MiniProject:
                 break
 
     def db_selection(self):
+        database_filename = ''
         databases = os.listdir('./DB')
         for key, database in enumerate(databases):
             database = database.replace(".csv", "")
@@ -78,17 +85,16 @@ class MiniProject:
             elif user_input == '1':
                 database_filename = databases[int(user_input)]
                 break
+            elif user_input == '2':
+                database_filename = databases[int(user_input)]
+                break
             else:
                 print(
                     "Oops, looks like you did not enter a valid option, please try again")
                 sleep(1)
 
-        return database_filename
-
-    def db_load(self):  # think of a better name than this
-
-        database_filename = self.db_selection()
-        db = Database(database_filename)
+        db = Database('DB/' + database_filename)
+        return db
 
 
 # Main

@@ -11,15 +11,15 @@ def main_menu():
 
 def options_menu():
     print('''
-    ________________________
-    |PRODUCT MENU            |
-    |________________________|
-    |RETURN TO MAIN MENU...|0|
-    |SHOW PRODUCTS.........|1|
-    |CREATE NEW PRODUCT....|2|
-    |UPDATE PRODUCT........|3|
-    |DELETE PRODUCT........|4|
-    |________________________|
+    __________________________________
+    |PRODUCT MENU                     |
+    |_________________________________|
+    |RETURN TO MAIN MENU............|0|
+    |SHOW ITEMS IN DATABASE.........|1|
+    |CREATE NEW ITEM IN DATABASE....|2|
+    |UPDATE ITEM IN DATABASE........|3|
+    |DELETE ITEM IN DATABASE........|4|
+    |_________________________________|
         ''')
 
 
