@@ -1,3 +1,3 @@
-customer_name,customer_address,customer_phone,courier,status
-John, Unit 2 12 Main Street LONDON WH1 2ER, 0789887334, 2, preparing
-Mary, Unit 1 10 Second Street LONDON M14 7NA, 0783247893, 1, delivering
+id,customer_name,customer_address,customer_phone,courier,status
+0,John,Unit 2 12 Main Street LONDON WH1 2ER,0789887334,2,preparing
+1,Mary,Unit 1 10 Second Street LONDON M14 7NA,0783247893,1,delivering

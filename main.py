@@ -57,10 +57,10 @@ class MiniProject:
                 exit()
 
             elif user_input == '3':  # update database
-                # self.clear()
                 db = self.db_selection()
-                db.print_fieldnames(db.fieldnames())
-                db.update()
+                id = self.update_id_request(db)
+                self.update_input(db)
+                db.update(id)
                 exit()
 
             elif user_input == '4':
@@ -96,6 +96,20 @@ class MiniProject:
         db = Database('DB/' + database_filename)
         return db
 
+    def update_id_request(self, db):
+        # self.clear()
+        db.read_db()
+        try:
+            user_input = int(self.prompt(
+                "Please select an id to choose what database item you wish to update"))
+        except ValueError:
+            self.clear()
+            print("Oops it looks like you did not enter an integer, please try again")
+            self.update_id_request(db)
+        return user_input
+
+    def update_input(self, db):
+        
 
 # Main
 if __name__ == "__main__":
