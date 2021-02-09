@@ -14,10 +14,9 @@ class Database:
 
         return self.db_data  # returns list of dictionaries
 
-    def write_db(self, dictionary):
+    def append_db(self, dictionary):
         with open(self.database_filename, 'w', newline='\n') as csv_file:
-            writer = csv.DictWriter(csv_file, fieldnames=self.fieldnames)
-
+            writer = csv.DictWriter(csv_file, fieldnames=self.fieldnames())
             writer.writeheader()
             writer.writerow(dictionary)
 
@@ -44,5 +43,9 @@ class Database:
         for key, field_name in enumerate(field_names):
             print(f"{key}: {field_name}")
 
-    def update(self, id):
+    def update(self, idx, dictionary):
         data = self.load_db()  # list of dictionaries
+        self.append_db(dictionary)
+        self.add_id()
+        self.read_db()
+        exit()

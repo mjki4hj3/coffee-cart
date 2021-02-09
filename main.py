@@ -58,9 +58,10 @@ class MiniProject:
 
             elif user_input == '3':  # update database
                 db = self.db_selection()
-                id = self.update_id_request(db)
-                self.update_input(db)
-                db.update(id)
+                idx = self.update_id_request(db)
+                update_dictionary = self.update_input(db, idx)
+
+                db.update(idx, update_dictionary)
                 exit()
 
             elif user_input == '4':
@@ -108,8 +109,19 @@ class MiniProject:
             self.update_id_request(db)
         return user_input
 
-    def update_input(self, db):
-        
+    def update_input(self, db, index):
+        database_item = {}
+        print("Press enter to skip updating that item")
+        for key in db.fieldnames():
+            user_input = input(f"{key}: ")
+
+            if user_input == "":
+                database_item[key] = db.load_db()[index][key]
+            else:
+                database_item[key] = user_input
+
+        return database_item
+
 
 # Main
 if __name__ == "__main__":
