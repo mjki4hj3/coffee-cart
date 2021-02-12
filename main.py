@@ -53,7 +53,8 @@ class MiniProject:
 
             elif user_input == '2':  # create new product
                 db = self.db_selection()
-                db.print_fieldnames()
+                created_dicitionary = self.create_input(db)
+                db.create(created_dicitionary)
                 exit()
 
             elif user_input == '3':  # update database
@@ -123,6 +124,20 @@ class MiniProject:
                 continue
             else:
                 database_items[index][key] = user_input
+        return database_items
+
+    def create_input(self, db):
+        database_items = {}
+        field_names = db.fieldnames()
+
+        for key in field_names[1:]:  # removes id from list
+            user_input = input(f"{key}: ")
+
+            if user_input == "":
+                print("You must enter something")
+                self.create_input(self.db_selection())
+            else:
+                database_items[key] = user_input
         return database_items
 
     def delete_input(self, db, index):
