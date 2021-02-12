@@ -14,12 +14,18 @@ class Database:
 
         return self.db_data  # returns list of dictionaries
 
-    def append_db(self, dictionary):
+    def write_db(self, dictionary):
         fieldnames = self.fieldnames()
         with open(self.database_filename, 'w', newline='\n') as csv_file:
             writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
             writer.writeheader()
             writer.writerows(dictionary)
+
+    def append_db(self, dictionary):
+        fieldnames = self.fieldnames()
+        with open(self.database_filename, 'a+', newline='\n') as csv_file:
+            writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+            writer.writerow(dictionary)
 
     def read_db(self):
         with open(self.database_filename, 'r') as csv_file:
@@ -27,10 +33,10 @@ class Database:
             for line in csv_dict:
                 print(str(line) + '\n')
 
-    def add_id(self):
-        data = self.db_data
-        data[-1]['id'] = str(int(data[-1]['id']) + 1)
-        print(data[-1]['id'])
+    def add_id(self, dictionary):
+        last_id = int(self.load_db()[-1]['id'])
+        dictionary['id'] = last_id + 1
+        return dictionary
 
     def fieldnames(self):
         field_names = []
@@ -44,9 +50,13 @@ class Database:
         for key, field_name in enumerate(field_names):
             print(f"{key}: {field_name}")
 
-    def update(self, dictionary):
-        print("working")
-        self.append_db(dictionary)
+    def create(self, dictionary):
+        updated_dictionary = self.add_id(dictionary)
+        self.append_db(updated_dictionary)
         print("Updated database: ")
         self.read_db()
-        exit()
+
+    def update(self, dictionary):
+        self.write_db(dictionary)
+        print("Updated database: ")
+        self.read_db()
