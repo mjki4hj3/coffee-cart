@@ -53,20 +53,23 @@ class MiniProject:
 
             elif user_input == '2':  # create new product
                 db = self.db_selection()
-                db.print_fieldnames()
+                created_dicitionary = self.create_input(db)
+                db.create(created_dicitionary)
                 exit()
 
             elif user_input == '3':  # update database
                 db = self.db_selection()
-                idx = self.update_id_request(db)
+                idx = self.id_request(db, 'update')
                 updated_dictionary = self.update_input(db, idx)
 
                 db.update(updated_dictionary)
                 exit()
 
-            elif user_input == '4':
+            elif user_input == '4':  # delete item in database
                 db = self.db_selection()
-                db.delete()
+                idx = self.id_request(db, 'delete')
+                self.delete_input(db, idx)
+                db.delete(updated_dictionary)
                 exit()
             else:
                 self.menu()
@@ -97,12 +100,12 @@ class MiniProject:
         db = Database('DB/' + database_filename)
         return db
 
-    def update_id_request(self, db):
+    def id_request(self, db, state: str):
         # self.clear()
         db.read_db()
         try:
             user_input = int(self.prompt(
-                "Please select an id to choose what database item you wish to update"))
+                f"Please select an id to choose what database item you wish to {state}"))
         except ValueError:
             self.clear()
             print("Oops it looks like you did not enter an integer, please try again")
@@ -121,6 +124,26 @@ class MiniProject:
                 continue
             else:
                 database_items[index][key] = user_input
+        return database_items
+
+    def create_input(self, db):
+        database_items = {}
+        field_names = db.fieldnames()
+
+        for key in field_names[1:]:  # removes id from list
+            user_input = input(f"{key}: ")
+
+            if user_input == "":
+                print("You must enter something")
+                self.create_input(self.db_selection())
+            else:
+                database_items[key] = user_input
+        return database_items
+
+    def delete_input(self, db, index):
+        database_items = db.load_db()  # list of dicitionaries
+        print("Press enter to skip updating that item")
+        
         return database_items
 
 
