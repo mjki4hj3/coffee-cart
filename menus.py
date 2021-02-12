@@ -21,13 +21,3 @@ def options_menu():
     |DELETE ITEM IN DATABASE........|4|
     |_________________________________|
         ''')
-
-
-def menu_dict():
-    return {
-        0: main_menu,
-        1: show_products,
-        2: create_product,
-        3: update_product,
-        4: delete_product,
-    }

@@ -53,13 +53,15 @@ class MiniProject:
 
             elif user_input == '2':  # create new product
                 db = self.db_selection()
-                db.print_fieldnames(db.fieldnames())
+                db.print_fieldnames()
                 exit()
 
             elif user_input == '3':  # update database
-                # self.clear()
                 db = self.db_selection()
-                db.update()
+                idx = self.update_id_request(db)
+                updated_dictionary = self.update_input(db, idx)
+
+                db.update(updated_dictionary)
                 exit()
 
             elif user_input == '4':
@@ -94,6 +96,32 @@ class MiniProject:
 
         db = Database('DB/' + database_filename)
         return db
+
+    def update_id_request(self, db):
+        # self.clear()
+        db.read_db()
+        try:
+            user_input = int(self.prompt(
+                "Please select an id to choose what database item you wish to update"))
+        except ValueError:
+            self.clear()
+            print("Oops it looks like you did not enter an integer, please try again")
+            self.update_id_request(db)
+        return user_input
+
+    def update_input(self, db, index):
+        database_items = db.load_db()  # list of dicitionaries
+        print("Press enter to skip updating that item")
+        field_names = db.fieldnames()
+
+        for key in field_names[1:]:  # removes id from list
+            user_input = input(f"{key}: ")
+
+            if user_input == "":
+                continue
+            else:
+                database_items[index][key] = user_input
+        return database_items
 
 
 # Main
