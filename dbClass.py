@@ -38,6 +38,14 @@ class Database:
         dictionary['id'] = last_id + 1
         return dictionary
 
+    def reset_id(self, dictionary):
+        counter = 0
+        for row in dictionary:
+            dictionary[counter]['id'] = counter
+            counter += 1
+
+        return dictionary
+
     def fieldnames(self):
         field_names = []
         with open(self.database_filename, 'r') as csv_file:
@@ -53,10 +61,16 @@ class Database:
     def create(self, dictionary):
         updated_dictionary = self.add_id(dictionary)
         self.append_db(updated_dictionary)
-        print("Updated database: ")
+        print("\n Updated database: ")
         self.read_db()
 
     def update(self, dictionary):
         self.write_db(dictionary)
-        print("Updated database: ")
+        print("\n Updated database: ")
+        self.read_db()
+
+    def delete(self, dictionary):
+        updated_dictionary = self.reset_id(dictionary)
+        self.write_db(updated_dictionary)
+        print("\n Updated database: ")
         self.read_db()
