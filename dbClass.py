@@ -15,10 +15,11 @@ class Database:
         return self.db_data  # returns list of dictionaries
 
     def append_db(self, dictionary):
+        fieldnames = self.fieldnames()
         with open(self.database_filename, 'w', newline='\n') as csv_file:
-            writer = csv.DictWriter(csv_file, fieldnames=self.fieldnames())
+            writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
             writer.writeheader()
-            writer.writerow(dictionary)
+            writer.writerows(dictionary)
 
     def read_db(self):
         with open(self.database_filename, 'r') as csv_file:
@@ -43,9 +44,9 @@ class Database:
         for key, field_name in enumerate(field_names):
             print(f"{key}: {field_name}")
 
-    def update(self, idx, dictionary):
-        data = self.load_db()  # list of dictionaries
+    def update(self, dictionary):
+        print("working")
         self.append_db(dictionary)
-        self.add_id()
+        print("Updated database: ")
         self.read_db()
         exit()
