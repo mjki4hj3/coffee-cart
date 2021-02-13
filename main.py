@@ -68,7 +68,7 @@ class MiniProject:
             elif user_input == '4':  # delete item in database
                 db = self.db_selection()
                 idx = self.id_request(db, 'delete')
-                self.delete_input(db, idx)
+                updated_dictionary = self.delete_input(db, idx)
                 db.delete(updated_dictionary)
                 exit()
             else:
@@ -142,8 +142,8 @@ class MiniProject:
 
     def delete_input(self, db, index):
         database_items = db.load_db()  # list of dicitionaries
-        print("Press enter to skip updating that item")
-        
+        database_items.pop(index)
+
         return database_items
 
 
